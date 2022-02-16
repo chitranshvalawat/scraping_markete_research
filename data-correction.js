@@ -26,7 +26,7 @@ async function main() {
                     dd['Individual Size (gm)'] = weight
                 }
                 // Kelloggs coco pops bars 20 g x 6 pieces
-                let combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+(x|X|×)\s+([\d.])\s+([a-z]|[A-Z]|\+)/)
+                let combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+(x|X|×)\s+([\d.]+)\s+([a-z]|[A-Z]|\+)/)
                 if (combo) {
                     console.log(combo);
                     dd.IS_Combo = "yes"
@@ -36,8 +36,8 @@ async function main() {
                     // await write('01.csv', rows, row);
                 }
                 else {
-                // Kelloggs coco pops bars 20 g x 6
-                    combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+((x)|(X)|(×))\s+([\d.])/)
+                    // Kelloggs coco pops bars 20 g x 6
+                    combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+((x)|(X)|(×))\s+([\d.]+)/)
                     if (combo) {
                         dd.IS_Combo = "yes"
                         let arr = combo[0].split(' ')
@@ -45,7 +45,7 @@ async function main() {
                         // await write('01.csv', rows, row);
                     }
                     else {
-                        combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)\s+(x|X|×)\s+([\d.])/)
+                        combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)\s+(x|X|×)\s+([\d.]+)/)
                         if (combo) {
                             dd.IS_Combo = "yes"
                             let arr = combo[0].split(' ')
@@ -53,15 +53,23 @@ async function main() {
                             // await write('01.csv', rows, row);
                         }
                         else {
-                            combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+(x|X|×)([\d.])\s/)
+                            combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+(x|X|×)([\d.]+)/)
                             if (combo) {
                                 dd.IS_Combo = "yes"
                                 let arr = combo[0].split(' ')
                                 dd['If Combo - Size'] = arr[arr.length - 1]
                                 // await write('01.csv', rows, row);
                             }
+                            // else {
+                            //     combo = name.match(/([\d.]+)\s+(lbs?|oz|g|kg|G|gram)\s+(x|X|×)([\d.])/)
+                            //     if (combo) {
+                            //         dd.IS_Combo = "yes"
+                            //         let arr = combo[0].split(' ')
+                            //         dd['If Combo - Size'] = arr[arr.length - 1]
+                            //         // await write('01.csv', rows, row);
+                            //     }
                             else {
-                                combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)(x|X|×)\s+([\d.])\s/)
+                                combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)(x|X|×)\s+([\d.]+)/)
                                 if (combo) {
                                     dd.IS_Combo = "yes"
                                     let arr = combo[0].split(' ')
@@ -69,7 +77,7 @@ async function main() {
                                     // await write('01.csv', rows, row);
                                 }
                                 else {
-                                    combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)(x|X|×)([\d.])\s/)
+                                    combo = name.match(/([\d.]+)(lbs?|oz|g|kg|G|gram)(x|X|×)([\d.]+)/)
                                     if (combo) {
                                         dd.IS_Combo = "yes"
                                         let arr = combo[0].split(' ')
@@ -81,6 +89,7 @@ async function main() {
                         }
                     }
                 }
+                // }
                 weight = dd['Individual Size (gm)'].replace("g", "");
                 let price = dd['Price (SAR)'].replace("SAR", "")
                 dd['SAR/g'] = parseFloat(price) / parseFloat(weight)
